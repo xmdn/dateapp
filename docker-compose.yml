@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # MongoDB Service
+  mongodb:
+    image: mongo:5.0
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminpass
+      MONGO_INITDB_DATABASE: mydatabase
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - django_network
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Django App Service
+  django:
+    build: 
+      context: .
+    container_name: django-app
+    command: bash -c "source venv/bin/activate && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app  # Map the current directory on the host to /app in the container
+      - /app/venv  # Exclude venv from being mapped
+    ports:
+      - "8034:8000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      DEBUG: "1"
+      DB_NAME: mydatabase
+      DB_USER: admin
+      DB_PASSWORD: adminpass
+      DB_HOST: mongodb
+      DB_PORT: 27017
+      DATABASE_URL: mongodb://admin:adminpass@mongo:27017/mydatabase
+      DJANGO_SETTINGS_MODULE: date_project.settings
+    links:
+      - mongodb
+    networks:
+      - django_network
+
+volumes:
+  mongo_data:
+
+networks:
+  django_network:
+    driver: bridge

@@ -1,0 +1,48 @@
+<!-- templates/component/base_header.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <!-- Add your CSS files here -->
+    <style>
+        .main_container {
+            width: 100%; /* Ensure it takes the full width */
+            margin: 0; /* Reset margin */
+            padding: 0; /* Reset padding */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <main class="main_container">
+        <script type="application/json" id="users_data">
+            {{ users|safe }}
+        </script>
+        <script type="application/json" id="header_links">
+            [
+                {"text": "Home", "url": "/home/"},
+                {"text": "Check", "url": "/"},
+                {"text": "Register", "url": "/register/"},
+                {"text": "Login", "url": "/login/"},
+                {"text": "Logout", "url": "/logout/"}
+            ]
+        </script>
+
+        {% block content %}
+        
+        <!-- Page-specific content will be inserted here -->
+        <div id="root"></div>
+            <script type="application/json" id="token_data">
+                {{ access|safe }}
+            </script>
+
+        {{ script_tag_users|safe }}
+        {{ content|safe }}
+        {% endblock %}
+    </main>
+</body>
+</html>

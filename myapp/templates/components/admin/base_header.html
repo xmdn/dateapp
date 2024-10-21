@@ -1,0 +1,61 @@
+<!-- templates/components/admin/base_admin_header.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add your CSS files here -->
+</head>
+<body>
+    <header>
+        <!-- <h1>Admin Panel</h1> -->
+        <!-- You can add navigation links here -->
+        <!-- <nav>
+            <ul>
+                <li><a href="/admin/">Admin Home</a></li> 
+                <li><a href="/user/">User Home</a></li> 
+                <li><a href="/register/">Register</a></li> 
+                <li><a href="/login/">Login</a></li> 
+                <li><a href="/logout/">Logout</a></li> 
+            </ul>
+        </nav> -->
+    </header>
+    
+    <main>
+        <script type="application/json" id="users_data">
+            {{ users|safe }}
+        </script>
+        <script>
+            
+            // console.log("Raw users data:", document.getElementById('users_data').textContent);
+            // Retrieve the users data from the script tag
+            // window.users = JSON.parse(document.getElementById('users_data').textContent);
+        </script>
+        <script type="application/json" id="header_links">
+            [
+                {"text": "Home", "url": "/home/"},
+                {"text": "Admin Home", "url": "/admin/"},
+                {"text": "User Home", "url": "/user/"},
+                {"text": "Register", "url": "/register/"},
+                {"text": "Login", "url": "/login/"},
+                {"text": "Logout", "url": "/logout/"}
+            ]
+        </script>
+
+
+        {% block content %}
+        <!-- Page-specific content will be inserted here -->
+        <div id="root"></div>
+        {% if token %}
+            <script type="application/json" id="token_data">
+                {{ access|safe }}
+            </script>
+        {% endif %}
+        
+        {{ script_tag_users|safe }}
+        
+        {{ content|safe }}
+        {% endblock %}
+    </main>
+</body>
+</html>

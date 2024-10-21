@@ -1,0 +1,40 @@
+<!-- templates/user_home.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+    <link rel="stylesheet" href="{% static 'css/main.e6c13ad2.css' %}">
+    <!-- <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
+    <!-- Load Babel standalone -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+</head>
+<body>
+    <p>Welcome, {{ user.username }}!</p>
+    
+    <!-- {% block javascript %} -->
+        <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <script type="text/babel" src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script type="text/babel" src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
+
+        <!-- <script type="module">
+            // import React from 'https://unpkg.com/react@16/umd/react.development.js';
+            // import ReactDOM from 'https://unpkg.com/react-dom@16/umd/react-dom.development.js';
+
+            import { renderComponent } from "{% static 'get_component.js' %}";
+
+            renderComponent('AnotherComponent', document.getElementById('react'));
+            // window.props = {{props}};
+            // window.react_mount = document.getElementById('react');
+
+        </script> -->
+        <!-- <script src="{% static 'components/NotFound.js'%}" type="text/babel"></script> -->
+    <!-- {% endblock javascript %} -->
+
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

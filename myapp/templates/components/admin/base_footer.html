@@ -1,0 +1,30 @@
+<!-- templates/components/admin/base_admin_header.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Footer{% endblock %}</title>
+    <!-- Add your CSS files here -->
+</head>
+<body>
+    <main>
+        <script type="application/json" id="footer_links">
+            [
+                {"text": "Testing", "url": "/test/"},
+                {"text": "Grand Opening", "url": "/opening/"},
+                {"text": "Challenges", "url": "/challenges/"},
+                {"text": "About", "url": "/about_us/"}
+            ]
+        </script>
+        {% block content %}
+        <!-- Page-specific content will be inserted here -->
+        {{ content|safe }}
+        {% endblock %}
+    </main>
+
+    <!-- <footer>
+        <p>&copy; {{ current_year }} Administration Of Site. All rights reserved.</p>
+    </footer> -->
+</body>
+</html>
