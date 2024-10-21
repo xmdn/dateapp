@@ -26,7 +26,7 @@ services:
     build: 
       context: .
     container_name: django-app
-    command: bash -c "source venv/bin/activate && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "source venv/bin/activate && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000 && npx webpack --watch"
     volumes:
       - .:/app  # Map the current directory on the host to /app in the container
       - /app/venv  # Exclude venv from being mapped
