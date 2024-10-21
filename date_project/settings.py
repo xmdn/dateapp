@@ -17,18 +17,18 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+from decouple import config, Csv
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k%zkok=tppk7s$ik-13ygbfo+6z_!l8mo!j8r@8^3exfr_ozma'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '188.191.238.134',  # Add your server's IP address here
+    config('ALLOWED_HOSTS')  # Add your server's IP address here
 ]
 
 LOGIN_REDIRECT_URL = '/home/'  # Redirect to user home after login
